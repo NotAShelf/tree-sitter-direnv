@@ -36,7 +36,10 @@ module.exports = grammar({
   conflicts: $ => [
     [$.primary_expression, $.array],
     [$.variable_assignment, $.expression],
+    [$.variable_name, $.word],
   ],
+
+
 
   word: $ => $.word,
 
@@ -47,44 +50,44 @@ module.exports = grammar({
     )),
 
     // Statements
-    statement: $ => prec(1, choice(
-      $.direnv_command_func,
-      $.direnv_use_func,
-      $.direnv_path_func,
-      $.direnv_expand_path_func,
-      $.direnv_path_add_func,
-      $.direnv_layout_func,
-      $.direnv_func,
-      $.command,
-      $.variable_assignment,
-      $.pipeline,
-      $.list,
-      $.if_statement,
-      $.while_statement,
-      $.for_statement,
-      $.case_statement,
-      $.function_definition,
-      $.compound_statement,
-      $.declaration_command,
-      $.unset_command,
-      $.test_command,
-      $.negated_command,
-      $.redirected_statement
-    )),
+    statement: $ => choice(
+      prec(3, $.variable_assignment),
+      prec(2, $.direnv_command_func),
+      prec(2, $.direnv_use_func),
+      prec(2, $.direnv_path_func),
+      prec(2, $.direnv_expand_path_func),
+      prec(2, $.direnv_path_add_func),
+      prec(2, $.direnv_layout_func),
+      prec(2, $.direnv_func),
+      prec(1, $.command),
+      prec(1, $.pipeline),
+      prec(1, $.list),
+      prec(1, $.if_statement),
+      prec(1, $.while_statement),
+      prec(1, $.for_statement),
+      prec(1, $.case_statement),
+      prec(1, $.function_definition),
+      prec(1, $.compound_statement),
+      prec(1, $.declaration_command),
+      prec(1, $.unset_command),
+      prec(1, $.test_command),
+      prec(1, $.negated_command),
+      prec(1, $.redirected_statement)
+    ),
 
     // Variable assignment
-    variable_assignment: $ => prec.right(choice(
+    variable_assignment: $ => prec.dynamic(10, prec.right(choice(
       seq(
-        field('name', $.variable_name),
+        field('name', alias($.word, $.variable_name)),
         '=',
         field('value', optional(choice($.expression, $.array)))
       ),
       seq(
-        field('name', $.variable_name),
+        field('name', alias($.word, $.variable_name)),
         '+=',
         field('value', choice($.expression, $.array))
       )
-    )),
+    ))),
 
     // Direnv-specific functions
     command: $ => choice(
@@ -330,10 +333,13 @@ module.exports = grammar({
     number: $ => /\d+/,
 
     // Words and identifiers
-    word: $ => token(repeat1(choice(
-      noneOf(' \t\r\n"\'\\$`|&;<>(){}[]='),
+    word: $ => token(prec(1, repeat1(choice(
+      noneOf(' \t\r\n"\'\\$`|&;<>(){}[]=#'),
       seq('\\', /./),
-    ))),
+    )))),
+
+    // Variable name pattern; only used in specific contexts
+    variable_name: $ => token(prec(0, /[a-zA-Z_][a-zA-Z0-9_]*/)),
 
     // Variable expansions
     variable_expansion: $ => choice(
@@ -345,9 +351,6 @@ module.exports = grammar({
         seq('/', choice($.word, /[^\/]+/), '/', optional(choice($.word, 'g')))
       )), '}')
     ),
-
-    // Variable name pattern - only used in specific contexts
-    variable_name: $ => token(prec(-1, /[a-zA-Z_][a-zA-Z0-9_]*/)),
 
     // Command substitution
     command_substitution: $ => choice(
@@ -411,7 +414,7 @@ module.exports = grammar({
       ))
     )),
 
-    // Control structures (simplified)
+    // Control structures
     if_statement: $ => seq(
       'if',
       $.statement,
