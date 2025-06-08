@@ -1,7 +1,7 @@
 # tree-sitter-direnv
 
 This is an experimntal Tree-sitter grammar for [direnv](https://direnv.net/)
-files (`.envrc`). The goal is to provides yntax highlighting and parsing for
+files (`.envrc`). The goal is to provides syntax highlighting and parsing for
 direnv files, including:
 
 - Direnv-specific functions (`has`, `use`, `layout`, etc.)
@@ -12,7 +12,7 @@ direnv files, including:
 
 ## Installation
 
-> [!DANGER]
+> [!WARNING]
 > tree-sitter-direnv is alpha quality software. While it _may_ work, the chances
 > are you will run into bugs. Testing is welcome and appreciated, but please
 > expect bugs.
