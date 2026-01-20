@@ -145,5 +145,5 @@
 ] @punctuation.bracket
 
 "$" @punctuation.special
-"#" @punctuation.special  
+"#" @punctuation.special
 "*" @punctuation.special
