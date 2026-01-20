@@ -12,8 +12,8 @@ pkgs.mkShell {
 
     # Formatters
     pkgs.treefmt
-    pkgs.nixpkgs-fmt
-    pkgs.nodePackages.prettier
+    pkgs.nixfmt
+    pkgs.prettier
     pkgs.rustfmt
     pkgs.clang-tools
   ];
