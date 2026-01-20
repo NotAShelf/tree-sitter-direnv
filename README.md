@@ -1,8 +1,9 @@
 # tree-sitter-direnv
 
-This is an experimntal Tree-sitter grammar for [direnv](https://direnv.net/)
-files (`.envrc`). The goal is to provides syntax highlighting and parsing for
-direnv files, including:
+[Direnv]: https://direnv.net
+
+This is an experimental Tree-sitter grammar for [Direnv] files (`.envrc`). The
+goal is to provides syntax highlighting and parsing for Direnv files, including:
 
 - Direnv-specific functions (`has`, `use`, `layout`, etc.)
 - Path manipulation functions (`PATH_add`, `source_env`, etc.)
@@ -10,12 +11,21 @@ direnv files, including:
 - Variable expansions and command substitutions
 - Comments and strings
 
+[my Neovim plugin for Direnv]: https://github.com/NotAShelf/direnv.nvim
+
+_without_ using editor-specific syntax files, such as a `syntax.vim`. This
+project was designed to be used alongside [my Neovim plugin for Direnv], but
+should work fine with any editor that supports Tree-sitter directly. If you are
+knowledgable in other editors, feel free to update the documentation for your
+own editor below!
+
 ## Installation
 
-> [!WARNING]
-> tree-sitter-direnv is alpha quality software. While it _may_ work, the chances
-> are you will run into bugs. Testing is welcome and appreciated, but please
-> expect bugs.
+> [!IMPORTANT]
+> tree-sitter-direnv is alpha quality software. While it should work as
+> intended, and is very unlikely to destroy anything you are almost guaranteed
+> to run into bugs and general annoyances. Testing is welcome and appreciated,
+> but please expect bugs and remember to report them accordingly!
 
 ### With tree-sitter CLI
 
@@ -74,5 +84,6 @@ tree-sitter generate
 
 ## License
 
-Available under the [MPL2 v2.0](/LICENSE). Please see the license file for more
-details.
+This project is made available under Mozilla Public License (MPL) version 2.0.
+See [LICENSE](LICENSE) for more details on the exact conditions. An online copy
+is provided [here](https://www.mozilla.org/en-US/MPL/2.0/).
