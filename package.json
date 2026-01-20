@@ -43,6 +43,7 @@
     "url": "https://github.com/NotAShelf/tree-sitter-direnv.git"
   },
   "license": "MPL-2.0",
+  "types": "bindings/node/index.d.ts",
   "tree-sitter": [
     {
       "scope": "source.direnv",
