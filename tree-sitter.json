@@ -15,7 +15,7 @@
   ],
   "metadata": {
     "version": "1.0.0",
-    "license": "MIT",
+    "license": "MPL-2.0",
     "description": "Direnv grammar for tree-sitter",
     "authors": [
       {
