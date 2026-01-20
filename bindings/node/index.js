@@ -4,4 +4,6 @@ module.exports = require("node-gyp-build")(root);
 
 try {
   module.exports.nodeTypeInfo = require("../../src/node-types.json");
-} catch (_) {}
+} catch (e) {
+  console.warn("Failed to load node-types.json:", e.message);
+}

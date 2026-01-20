@@ -3,3 +3,15 @@
 
 **/*.log
 **/*.html
+
+# Test files
+test*.envrc
+
+# Generated parser
+src/parser.c
+src/parser.h
+src/tree_sitter/
+
+# Rust build artifacts
+bindings/rust/target/
+Cargo.lock
