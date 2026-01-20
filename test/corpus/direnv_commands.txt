@@ -1,0 +1,149 @@
+================================================================================
+Has command with tool names
+================================================================================
+
+has git
+has docker
+has node
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_command_func
+    (direnv_command
+      (word)))
+  (direnv_command_func
+    (direnv_command
+      (word)))
+  (direnv_command_func
+    (direnv_command
+      (word))))
+
+================================================================================
+Dotenv commands
+================================================================================
+
+dotenv
+dotenv_if_exists
+dotenv .env.local
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_path_func)
+  (direnv_path_func)
+  (direnv_path_func
+    (direnv_path
+      (word))))
+
+================================================================================
+Use commands with various tools
+================================================================================
+
+use nix
+use flake
+use_nix shell.nix
+use node 18
+use rbenv 3.1.0
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_use_func
+    (direnv_use_command
+      (word)))
+  (direnv_use_func
+    (direnv_use_command
+      (word)))
+  (direnv_use_func
+    (direnv_use_command
+      (word)))
+  (direnv_use_func
+    (direnv_use_command
+      (word))
+    (direnv_use_command
+      (word)))
+  (direnv_use_func
+    (direnv_use_command
+      (word))
+    (direnv_use_command
+      (word))))
+
+================================================================================
+Layout commands
+================================================================================
+
+layout python
+layout go
+layout node
+layout python /usr/bin/python3
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_layout_func
+    (direnv_layout_language_path))
+  (direnv_layout_func
+    (direnv_layout_language))
+  (direnv_layout_func
+    (direnv_layout_language))
+  (direnv_layout_func
+    (direnv_layout_language_path))
+  (command
+    (simple_command
+      (word))))
+
+================================================================================
+Path manipulation commands
+================================================================================
+
+PATH_add bin
+PATH_add ./local/bin
+MANPATH_add ./docs
+path_add PYTHONPATH ./lib
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_path_add_func
+    (direnv_var
+      (word)))
+  (direnv_path_add_func
+    (direnv_var
+      (word)))
+  (direnv_path_add_func
+    (direnv_var
+      (word)))
+  (direnv_path_add_func
+    (direnv_var
+      (word)))
+  (command
+    (simple_command
+      (word))))
+
+================================================================================
+Source and environment commands
+================================================================================
+
+source_env ../.envrc
+source_up
+source_url https://example.com/.envrc
+watch_file package.json
+watch_dir src/
+
+--------------------------------------------------------------------------------
+
+(program
+  (direnv_path_func
+    (direnv_path
+      (word)))
+  (direnv_path_func)
+  (direnv_path_func
+    (direnv_path
+      (word)))
+  (direnv_path_func
+    (direnv_path
+      (word)))
+  (direnv_path_func
+    (direnv_path
+      (word))))

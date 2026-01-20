@@ -1,0 +1,150 @@
+================================================================================
+String variables with quotes
+================================================================================
+
+MESSAGE="Hello World"
+PATH_VAR="/usr/local/bin:/usr/bin"
+EMPTY_STRING=""
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable_assignment
+    name: (variable_name)
+    value: (string))
+  (variable_assignment
+    name: (variable_name)
+    value: (string))
+  (variable_assignment
+    name: (variable_name)
+    value: (string)))
+
+================================================================================
+Variables with expansions
+================================================================================
+
+HOME_BIN="$HOME/bin"
+FULL_PATH="${HOME}/.local/bin"
+CONDITIONAL="${VAR:-default}"
+LENGTH="${#PATH}"
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable_assignment
+    name: (variable_name)
+    value: (string
+      (variable_expansion
+        (variable_name))))
+  (variable_assignment
+    name: (variable_name)
+    value: (string
+      (variable_expansion
+        (variable_name))))
+  (variable_assignment
+    name: (variable_name)
+    value: (string
+      (variable_expansion
+        (variable_name)
+        (variable_expansion_modifier
+          (variable_expansion_default)))))
+  (variable_assignment
+    name: (variable_name)
+    value: (string
+      (variable_expansion
+        (variable_name)))))
+
+================================================================================
+Append assignments
+================================================================================
+
+PATH+=/new/path
+LD_LIBRARY_PATH+=:$HOME/lib
+CFLAGS+="-O2 -Wall"
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (command
+    (simple_command
+      (variable_expansion
+        (variable_name))))
+  (command
+    (simple_command
+      (word)))
+  (variable_assignment
+    name: (variable_name)
+    value: (string)))
+
+================================================================================
+Numeric and special variables
+================================================================================
+
+DEBUG=1
+VERBOSE=true
+COUNT=42
+PID=$$
+EXIT_CODE=$?
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    (ERROR)
+    value: (assignment_expression
+      (variable_expansion
+        (variable_name))
+      (variable_expansion
+        (MISSING variable_name))))
+  (command
+    (simple_command
+      (word))))
+
+================================================================================
+Mixed variable types
+================================================================================
+
+SIMPLE=value
+QUOTED="quoted value"
+WITH_SPACES="value with spaces"
+MULTIWORD=first_second_third
+UNDERSCORE_VAR=test_value
+CAMELCASE=testValue
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (string))
+  (variable_assignment
+    name: (variable_name)
+    value: (string))
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (word))
+  (variable_assignment
+    name: (variable_name)
+    value: (word)))
